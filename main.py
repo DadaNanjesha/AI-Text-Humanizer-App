@@ -144,6 +144,15 @@ def main():
                     f"| **Sentence Count**: {output_sentence_count}"
                 )
 
+                # Download button for transformed text
+                st.download_button(
+                    label="Download Humanized text",
+                    data=transformed,
+                    file_name="humanized.txt",
+                    mime="text/plain",
+                    help="Click to download the transformed text"
+                )
+
     st.markdown("---")
 
 
