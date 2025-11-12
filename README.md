@@ -2,7 +2,7 @@
 Transform AI-generated text into **formal, human-like, and academic writing** with ease, avoids AI detector! 🚀
 
 ![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-red?style=flat-square&logo=streamlit)
-![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python)
+![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11-blue?style=flat-square&logo=python)
 ![License](https://img.shields.io/github/license/DadaNanjesha/AI-Text-Humanizer-App?style=flat-square)
 
 
@@ -32,6 +32,11 @@ Building new version of this project here in this repos [https://github.com/Dada
 
 ## 📥 Installation  
 
+### ⚠️ Python Version Requirements
+- **Required**: Python 3.9, 3.10, or 3.11
+- **Not supported**: Python 3.12+ (dependency compatibility issues)
+- **Not supported**: Python 3.8 or earlier
+
 ### 1️⃣ Clone the Repository  
 ```bash
 git clone https://github.com/DadaNanjesha/AI-Text-Humanizer-App.git
@@ -40,22 +45,50 @@ cd AI-Text-Humanizer-App
 
 ### 2️⃣ Set Up a Virtual Environment (Recommended)  
 ```bash
-python -m venv venv
+python3.11 -m venv venv  # Use Python 3.9, 3.10, or 3.11
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 ```
 
 ### 3️⃣ Install Dependencies  
+
+**Option A: Using setup.sh (Recommended)**
 ```bash
-pip install --upgrade pip
-pip install -r requirements.txt
+chmod +x setup.sh
+./setup.sh
 ```
 
-### 4️⃣ Download NLP Models  
+**Option B: Manual Installation**
 ```bash
+pip install --upgrade pip setuptools wheel
+
+# Install NumPy first (must be <2.0 for compatibility)
+pip install "numpy<2.0"
+
+# Install PyTorch from PyTorch repository
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install other dependencies
+pip install -r requirements.txt
+
+# Download NLP models
 python -m spacy download en_core_web_sm
-python -c "import nltk; nltk.download('punkt'); nltk.download('wordnet'); nltk.download('averaged_perceptron_tagger');"
+python -c "import nltk; nltk.download('punkt', quiet=True); nltk.download('wordnet', quiet=True); nltk.download('averaged_perceptron_tagger', quiet=True)"
 ```
+
+### 🔧 Troubleshooting
+
+**Issue: `blis==1.2.0` installation fails**
+- **Solution**: Use Python 3.9-3.11. Python 3.12+ is not supported.
+
+**Issue: `torch==2.4.1` not found**
+- **Solution**: Install torch from PyTorch repository: `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+
+**Issue: NumPy compatibility warnings**
+- **Solution**: NumPy 2.x is not compatible. The setup script automatically installs NumPy <2.0.
+
+**Issue: spaCy model download fails**
+- **Solution**: Ensure you have internet connection and try: `python -m spacy download en_core_web_sm`
 
 ---
 
